@@ -4,6 +4,7 @@ Build-Depends:
  debhelper-compat (= 13),
  meson (>= 0.59.0),
  pkg-config,
+ libdrm-dev,
 Standards-Version: 4.6.0
 Section: libs
 Maintainer: Simon Long <simon@raspberrypi.com>

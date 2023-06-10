@@ -282,9 +282,13 @@ layer_plane_compatible_get(struct alloc_step *step, struct liftoff_rpi_layer *la
             plane->zpos > step->primary_plane_zpos)
           {
              liftoff_rpi_log(LIFTOFF_RPI_DEBUG,
-                             "%s Layer %p -> plane %"PRIu32": "
-                             "layer zpos under primary",
-                             step->log_prefix, (void *)layer, plane->id);
+                             "%s Layer %p -> plane %"PRIu32": zpos %d "
+                             "layer zpos %d under primary %d "
+                             "Step primary layer zpos %d",
+                             step->log_prefix, (void *)layer, plane->id,
+                             plane->zpos,
+                             (int)zprop->value, step->primary_plane_zpos,
+                             step->primary_layer_zpos);
              return false;
           }
      }
@@ -348,7 +352,7 @@ output_layers_choose(struct liftoff_rpi_output *output, struct alloc_result *res
    int cur, ret;
    size_t rplanes;
    struct alloc_step nstep = {0};
-   const char *type;
+   const char *type = NULL;
 
    dev = output->dev;
 
@@ -413,10 +417,10 @@ output_layers_choose(struct liftoff_rpi_output *output, struct alloc_result *res
           }
         if (!layer_plane_compatible_get(step, layer, plane))
           {
-             /* liftoff_rpi_log(LIFTOFF_RPI_DEBUG, */
-             /*                 "%s Layer %p -> plane %"PRIu32": " */
-             /*                 "Not Compatible", */
-             /*                 step->log_prefix, (void *)layer, plane->id); */
+             liftoff_rpi_log(LIFTOFF_RPI_DEBUG,
+                             "%s Layer %p -> plane %"PRIu32": "
+                             "Not Compatible",
+                             step->log_prefix, (void *)layer, plane->id);
              continue;
           }
 
@@ -687,7 +691,7 @@ liftoff_rpi_output_apply(struct liftoff_rpi_output *output, drmModeAtomicReq *re
    struct alloc_result result = {0};
    struct alloc_step step = {0};
    size_t i = 0, cand = 0;
-   const char *type;
+   const char *type = NULL;
    int ret;
 
    dev = output->dev;

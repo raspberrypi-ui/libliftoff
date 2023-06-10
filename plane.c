@@ -451,6 +451,8 @@ liftoff_rpi_plane_destroy(struct liftoff_rpi_plane *plane)
 {
    size_t i = 0;
 
+   if (!plane) return;
+
    if (plane->layer) plane->layer->plane = NULL;
    liftoff_rpi_list_remove(&plane->link);
 

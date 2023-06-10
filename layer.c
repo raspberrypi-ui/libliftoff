@@ -120,7 +120,7 @@ layer_candidate_plane_add(struct liftoff_rpi_layer *layer, struct liftoff_rpi_pl
 {
    size_t i = 0;
    ssize_t empty = -1;
-   char *type = NULL;
+   /* char *type = NULL; */
 
    for (; i < layer->output->dev->planes_cap; i++)
      {
@@ -130,20 +130,20 @@ layer_candidate_plane_add(struct liftoff_rpi_layer *layer, struct liftoff_rpi_pl
           empty = (ssize_t)i;
      }
 
-   switch (plane->type)
-     {
-      case DRM_PLANE_TYPE_PRIMARY:
-        type = "PRIMARY";
-        break;
-      case DRM_PLANE_TYPE_CURSOR:
-        type = "CURSOR";
-        break;
-      case DRM_PLANE_TYPE_OVERLAY:
-        type = "OVERLAY";
-        break;
-      default:
-        break;
-     }
+   /* switch (plane->type) */
+   /*   { */
+   /*    case DRM_PLANE_TYPE_PRIMARY: */
+   /*      type = "PRIMARY"; */
+   /*      break; */
+   /*    case DRM_PLANE_TYPE_CURSOR: */
+   /*      type = "CURSOR"; */
+   /*      break; */
+   /*    case DRM_PLANE_TYPE_OVERLAY: */
+   /*      type = "OVERLAY"; */
+   /*      break; */
+   /*    default: */
+   /*      break; */
+   /*   } */
 
    if (empty < 0) return;
 
@@ -355,4 +355,10 @@ liftoff_rpi_layer_candidate_plane_get(struct liftoff_rpi_layer *layer, struct li
      }
 
    return false;
+}
+
+bool
+liftoff_rpi_layer_visible_get(struct liftoff_rpi_layer *layer)
+{
+   return layer_visible_get(layer);
 }

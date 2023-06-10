@@ -73,6 +73,7 @@ int liftoff_rpi_layer_property_set(struct liftoff_rpi_layer *layer, int property
 void liftoff_rpi_layer_property_unset(struct liftoff_rpi_layer *layer, int property);
 void liftoff_rpi_layer_fb_composited_set(struct liftoff_rpi_layer *layer);
 struct liftoff_rpi_plane *liftoff_rpi_layer_plane_get(struct liftoff_rpi_layer *layer);
+bool liftoff_rpi_layer_visible_get(struct liftoff_rpi_layer *layer);
 
 /* API plane functions */
 struct liftoff_rpi_plane *liftoff_rpi_plane_create(struct liftoff_rpi_device *dev, uint32_t id);
